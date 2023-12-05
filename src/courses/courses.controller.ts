@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param,  Post, Put, Res } from '@nestjs/common';
 
 @Controller('courses')
 export class CoursesController {
@@ -17,5 +17,17 @@ export class CoursesController {
     @Post()
     create(@Body() body) {
         return body;
+    }
+
+    @Put(':id')
+    update(@Param('id') id: string, @Body() body) {
+        console.log(body)
+        return `Update course com ID ${id}`;
+    }
+
+    @HttpCode(HttpStatus.NO_CONTENT)
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return `Delete course com ID ${id}`
     }
 }
