@@ -11,4 +11,13 @@ export class CoursesService {
             tags: ['Cardio', 'Categoria'],
         },
     ]
+
+    finAll() {
+        return this.courses;
+    }
+
+    findOne(id: number){
+        return this.courses.find(course => course.id === id)
+
+    }
 }
