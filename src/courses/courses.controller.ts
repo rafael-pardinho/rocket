@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param,  Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param,  Patch,  Post, Put, Res } from '@nestjs/common';
+import { CoursesService } from './courses.service';
 
 @Controller('courses')
 export class CoursesController {
+    constructor(private readonly courseService: CoursesService){}
 
     @Get()
     findAll(@Res() response) {
@@ -19,7 +21,7 @@ export class CoursesController {
         return body;
     }
 
-    @Put(':id')
+    @Patch(':id')
     update(@Param('id') id: string, @Body() body) {
         console.log(body)
         return `Update course com ID ${id}`;
