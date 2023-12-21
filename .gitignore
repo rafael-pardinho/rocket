@@ -37,3 +37,4 @@ lerna-debug.log*
 # DOCKER
 .docker
 .dockerignore
+*.docker
