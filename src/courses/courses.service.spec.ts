@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { CoursesService } from './courses.service';
 import { AnyBulkWriteOperation } from 'typeorm';
+import { CreateCourseDTO } from './dto/create-course-dto';
 
 describe('CoursesService unit Tests', () => {
   let service: CoursesService;
@@ -49,5 +50,23 @@ describe('CoursesService unit Tests', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should create a coure', async () => {
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository;
+    //@ts-expect-error defined part of methods
+    service['tagRepository'] = mockTagRepository;
+
+    const createCourseDTO: CreateCourseDTO = {
+      name: 'test',
+      description: 'test description',
+      tags: ['eco'],
+    };
+
+    const newCourse = await service.create(createCourseDTO);
+
+    expect(mockCourseRepository.save).toHaveBeenCalled();
+    expect(expectOutputCourses).toStrictEqual(newCourse);
   });
 });
