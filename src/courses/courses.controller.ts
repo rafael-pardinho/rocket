@@ -42,4 +42,10 @@ export class CoursesController {
   remove(@Param('id') id: string) {
     return this.courseService.remove(id);
   }
+
+  @Delete('id')
+  removeone(@Param('id') id: string) {
+    return this.courseService.remove(id);
+  }
+
 }
